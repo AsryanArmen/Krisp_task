@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  generator:
+    build: ./generator
+    container_name: generator
+    ports:
+      - "5000:5000"
+
+  invoker:
+    build: ./invoker
+    container_name: invoker
+    ports:
+      - "5001:5001"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
